@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:smb="http://www.mulesoft.org/schema/mule/smb" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/smb http://www.mulesoft.org/schema/mule/smb/current/mule-smb.xsd">
+	<smb:config name="SMB_Connector_Config" doc:name="SMB Connector Config" doc:id="5c550579-8a9e-4777-8bf9-72cf1f7eab52" >
+		<smb:connection domain="EC2AMAZ-ECF1FSN" host="ec2-18-206-148-16.compute-1.amazonaws.com" share="/scans" username="Administrator" password="BQpx;Y)dN.&amp;@VcYvEOyZ%3nUGqUECSSu" />
+	</smb:config>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="74ccf974-2ecd-445a-84f5-12d455e04d38" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="testsmbFlow" doc:id="d379996b-5a2e-41d0-b0c5-58a60dcd569e" >
+		<http:listener doc:name="Listener" doc:id="68145c32-15df-41bd-b371-747969a3c436" config-ref="HTTP_Listener_config" path="/test"/>
+		<smb:directory-list doc:name="Directory List" doc:id="ce79b093-3ea1-40b1-94aa-fe0f119f5649" config-ref="SMB_Connector_Config"/>
+	</flow>
+</mule>
